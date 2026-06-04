@@ -10,6 +10,78 @@
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
+/* THEME VARIABLES */
+/**************/
+
+:root {
+  --bg: #f6d9b1;
+  --bg-footer: #e4c69b;
+  --border: #eee;
+  --border-footer: #ddd;
+  --text: #333;
+  --text-heading: #222;
+  --text-secondary: #666;
+  --text-tertiary: #888;
+  --text-muted: #555;
+  --link: #4183C4;
+  --link-accent: #0077cc;
+  --tag-bg: #ffe3b3;
+  --tag-text: #3a2c1c;
+  --tag-border: #d4a373;
+  --tag-hover-bg: #ffd8a8;
+  --tag-active-bg: #c97b32;
+  --tag-active-border: #a55a1c;
+  --selection-bg: #eee;
+  --selection-text: #000;
+}
+
+[data-theme="dark"] {
+  --bg: #1e1508;
+  --bg-footer: #150e04;
+  --border: #3a2c1c;
+  --border-footer: #3a2c1c;
+  --text: #e0c9a0;
+  --text-heading: #f0ddb8;
+  --text-secondary: #a08060;
+  --text-tertiary: #806040;
+  --text-muted: #907050;
+  --link: #7ab4e8;
+  --link-accent: #5599cc;
+  --tag-bg: #3a2510;
+  --tag-text: #e0c9a0;
+  --tag-border: #6b4020;
+  --tag-hover-bg: #4a3018;
+  --tag-active-bg: #8b5a20;
+  --tag-active-border: #6b4015;
+  --selection-bg: #3a2c1c;
+  --selection-text: #f0ddb8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e1508;
+    --bg-footer: #150e04;
+    --border: #3a2c1c;
+    --border-footer: #3a2c1c;
+    --text: #e0c9a0;
+    --text-heading: #f0ddb8;
+    --text-secondary: #a08060;
+    --text-tertiary: #806040;
+    --text-muted: #907050;
+    --link: #7ab4e8;
+    --link-accent: #5599cc;
+    --tag-bg: #3a2510;
+    --tag-text: #e0c9a0;
+    --tag-border: #6b4020;
+    --tag-hover-bg: #4a3018;
+    --tag-active-bg: #8b5a20;
+    --tag-active-border: #6b4015;
+    --selection-bg: #3a2c1c;
+    --selection-text: #f0ddb8;
+  }
+}
+
+/**************/
 /* BASE RULES */
 /**************/
 
@@ -18,9 +90,9 @@ html {
 }
 
 body {
-	background: $white;
-  font: 18px/1.4 $helvetica;
-  color: $darkGray;
+	background: var(--bg);
+  font: 18px/1.4 "Times New Roman", Times, serif;
+  color: var(--text);
 }
 
 .container {
@@ -31,9 +103,10 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $helveticaNeue;
-  color: $darkerGray;
+  font-family: "Times New Roman", Times, serif;
+  color: var(--text-heading);
   font-weight: bold;
+  text-align: center;
 
   line-height: 1.7;
   margin: 1em 0 15px;
@@ -61,19 +134,21 @@ h3 {
 
 h4 {
   font-size: 18px;
-  color: $gray;
+  color: var(--text-secondary);
 }
 
 p {
   margin: 15px 0;
+  text-indent: 2em;
+  line-height: 1.8;
 }
 
 a {
-  color: $blue;
+  color: var(--link);
   text-decoration: none;
 	cursor: pointer;
   &:hover, &:active {
-    color: $blue;
+    color: var(--link);
   }
 }
 
@@ -110,6 +185,21 @@ img {
   max-width: 100%;
 }
 
+summary {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+summary:hover {
+  text-decoration: underline;
+  color: var(--link-accent);
+}
+
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
@@ -117,17 +207,17 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;
+  color: var(--text-secondary);
 }
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $black;
-  background: $lightGray;
+  color: var(--selection-text);
+  background: var(--selection-bg);
 }
 ::selection {
-  color: $black;
-  background: $lightGray;
+  color: var(--selection-text);
+  background: var(--selection-bg);
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -156,7 +246,7 @@ img {
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid var(--border);
 
   @include mobile {
     text-align: center;
@@ -192,9 +282,9 @@ img {
 
 .site-name {
   margin: 0;
-  color: $darkGray;
+  color: var(--text-heading);
   cursor: pointer;
-  font-family: $helveticaNeue;
+  font-family: "Times New Roman", Times, serif;
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
@@ -202,7 +292,7 @@ img {
 
 .site-description {
   margin: -5px 0 0 0;
-  color: $gray;
+  color: var(--text-secondary);
   font-size: 16px;
 
   @include mobile {
@@ -213,7 +303,7 @@ img {
 nav {
   float: right;
   margin-top: 23px; // @TODO: Vertically middle align
-  font-family: $helveticaNeue;
+  font-family: "Times New Roman", Times, serif;
   font-size: 18px;
 
   @include mobile {
@@ -225,15 +315,37 @@ nav {
 
   a {
     margin-left: 20px;
-    color: $darkGray;
+    color: var(--text);
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
 
     @include mobile {
       margin: 0 10px;
-      color: $blue;
+      color: var(--link);
     }
+  }
+}
+
+// Dark mode toggle button
+.theme-toggle {
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  color: var(--bg);
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  margin-left: 20px;
+  padding: 2px 8px;
+  vertical-align: middle;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @include mobile {
+    margin: 0 10px;
   }
 }
 
@@ -243,7 +355,7 @@ nav {
 
 .posts > .post {
   padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
+  border-bottom: 1px solid var(--border);
 }
 
 .posts > .post:last-child {
@@ -254,9 +366,9 @@ nav {
 .post {
   blockquote {
     margin: 1.8em .8em;
-    border-left: 2px solid $gray;
+    border-left: 2px solid var(--text-secondary);
     padding: 0.1em 1em;
-    color: $gray;
+    color: var(--text-secondary);
     font-size: 22px;
     font-style: italic;
   }
@@ -273,13 +385,198 @@ nav {
 
 .wrapper-footer {
   margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
+  border-top: 1px solid var(--border-footer);
+  border-bottom: 1px solid var(--border-footer);
+  background-color: var(--bg-footer);
 }
 
 footer {
   padding: 20px 0;
+  text-align: center;
+}
+
+ul.custom-post-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.custom-post-list li {
+  margin-bottom: 20px;  /* add space between items */
+  display: flex;
+  align-items: flex-start;
+}
+
+.cat-bullet {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.post-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.project-card {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.project-title {
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+.project-description {
+  font-size: 1.2em;
+  margin-top: 10px;
+  color: var(--text-muted);
+}
+
+.project-divider {
+  border: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.about-img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-img {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.tag-hub {
+
+  // Tag Buttons Section
+    #tag-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* this centers items on each row */
+    gap: 8px 10px; /* vertical and horizontal spacing between buttons */
+    margin-bottom: 1em;
+
+    button {
+      background-color: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-family: Georgia, serif;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: var(--tag-hover-bg);
+        border-color: var(--tag-active-bg);
+      }
+
+      &.active {
+        background-color: var(--tag-active-bg);
+        color: white;
+        border-color: var(--tag-active-border);
+      }
+    }
+  }
+
+  // Post List
+  .custom-post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-post-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .cat-bullet {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .post-content a {
+    text-decoration: none;
+    color: var(--link-accent);
+    font: 20px/1.4 "Times New Roman", Times, serif;
+  }
+
+  .post-content a:hover {
+    text-decoration: underline;
+  }
+}
+
+.post-header {
+  margin-bottom: 1rem;
+}
+
+.post-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 0.3rem 0;
+  text-align: left;
+}
+
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  font-size: 1rem;
+}
+
+.post-date,
+.post-views {
+  text-align: right;
+}
+
+.read-time {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin-top: 0.1rem;
+}
+
+.audio-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.audio-item {
   text-align: center;
 }
 
